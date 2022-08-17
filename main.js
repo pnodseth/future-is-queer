@@ -1,34 +1,56 @@
 import './style.css'
 import words from "./words.json"
-import {Tween} from "@tweenjs/tween.js";
-
-let allWords = [...words];
+import {getWords} from "./public/firebase.js";
 
 const wordEl = document.querySelector(".change-word");
 const button = document.querySelector("button")
+
+let allWords = [...words];
+
+let isShuffling = false;
+
+async function shuffleWords() {
+    const randomElement = allWords[Math.floor(Math.random() * allWords.length)];
+
+    const shuffled = shuffleArray([...words, randomElement])
+    const half = shuffled.splice(0,12);
+    for (let word of half) {
+        await waitForMs(180);
+        wordEl.innerHTML = word;
+    }
+
+    // Then display the new word
+    // Also, remove the used words so it's not reused.
+    // When all words have been used, reset so all words are shown again
+    if (allWords.length === 0) {
+        allWords = [...words];
+    }
+    wordEl.innerHTML = randomElement
+
+    const idx = allWords.indexOf(randomElement);
+    allWords.splice(idx, 1)
+}
 
 async function setupWordShuffle() {
 
     button.addEventListener("click", async () => {
         // shuffle the array of all words, that should be tweened before end word is displayed
-        const shuffled = shuffleArray([...words])
-        for (let word of shuffled) {
-            await waitForMs(100);
-            wordEl.innerHTML = word;
+        if (!isShuffling) {
+            isShuffling = true;
+            await shuffleWords();
+            isShuffling = false;
         }
 
-        // Then display the new word
-        // Also, remove the used words so it's not reused.
-        // When all words have been used, reset so all words are shown again
-        if (allWords.length === 0) {
-            allWords = [...words];
+    })
+
+    document.addEventListener("keypress", async (e) => {
+        if (e.key === "Enter") {
+            if (!isShuffling) {
+                isShuffling = true;
+                await shuffleWords();
+                isShuffling = false;
+            }
         }
-        const randomElement = allWords[Math.floor(Math.random() * allWords.length)];
-        wordEl.innerHTML = randomElement
-
-        const idx = allWords.indexOf(randomElement);
-        allWords.splice(idx, 1)
-
     })
 }
 
@@ -57,6 +79,9 @@ function shuffleArray(array) {
     return array;
 }
 
+
+/*const words2 = await getWords();
+console.log("words: ", words2)*/
 
 
 
