@@ -1,34 +1,43 @@
-import './style.css'
-import words from "./words.json"
+import './assets/css/normalize.css'
+import './assets/css/style.css'
+import originalWordArray from "./words.json"
 import {getWords} from "./public/firebase.js";
+import {setRandomFont} from "./fonts.js";
 
 const wordEl = document.querySelector(".change-word");
 const button = document.querySelector("button")
 
-let allWords = [...words];
+let wordsRemaining = [...originalWordArray];
 
 let isShuffling = false;
 
 async function shuffleWords() {
-    const randomElement = allWords[Math.floor(Math.random() * allWords.length)];
+    // Find a random word that will be displayed after the shuffle
+    const randomElement = wordsRemaining[Math.floor(Math.random() * wordsRemaining.length)];
 
-    const shuffled = shuffleArray([...words, randomElement])
+    // Shuffle the array
+    const shuffled = shuffleArray([...originalWordArray, randomElement])
     const half = shuffled.splice(0,12);
+
+    const timeBetweenWords = 180;
+
     for (let word of half) {
-        await waitForMs(180);
+        await waitForMs(timeBetweenWords);
+        setRandomFont();
         wordEl.innerHTML = word;
     }
 
     // Then display the new word
     // Also, remove the used words so it's not reused.
     // When all words have been used, reset so all words are shown again
-    if (allWords.length === 0) {
-        allWords = [...words];
-    }
     wordEl.innerHTML = randomElement
 
-    const idx = allWords.indexOf(randomElement);
-    allWords.splice(idx, 1)
+    if (wordsRemaining.length === 0) {
+        wordsRemaining = [...originalWordArray];
+    }
+
+    const idx = wordsRemaining.indexOf(randomElement);
+    wordsRemaining.splice(idx, 1)
 }
 
 async function setupWordShuffle() {

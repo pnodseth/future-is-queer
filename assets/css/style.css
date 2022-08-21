@@ -1,0 +1,127 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 4rem;
+  font-weight: 400;
+  color: #FFF;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  background-color: var(--background);
+  --current-font: Zighead;
+  --background: #000;
+}
+
+
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+p {
+  margin: 0;
+}
+
+#app {
+  padding-top: 22vh;
+  padding-left: 20vw;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+
+}
+
+.future-is {
+  margin-bottom: 140px;
+}
+
+.change-word {
+  font-family: var(--current-font);
+  font-size: 120px;
+}
+
+.underline {
+  height: 3px;
+  width: 70vw;
+  background-color: #FFF;
+}
+
+button {
+  margin-top: 40px;
+  background-color: #FFF;
+  color: #000;
+  font-size: 40px;
+  border: none;
+  outline: none;
+  padding: 16px 40px;
+  border-radius: 40px;
+}
+
+@font-face {
+  font-family: Aveneur;
+  src: url("../fonts/Aveneur.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Baunk;
+  src: url("../fonts/Baunk.otf") format("opentype");
+}
+
+@font-face {
+  font-family: BROKAT_BY_BOAFFF;
+  src: url("../fonts/BROKAT_BY_BOAFFF.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: Chemre;
+  src: url("../fonts/Chemre.otf") format("opentype");
+}
+
+@font-face {
+  font-family: FT88-Italic;
+  src: url("../fonts/FT88-Italic.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Greca;
+  src: url("../fonts/Greca.otf") format("opentype");
+}
+
+@font-face {
+  font-family: KOUVA GLORIN;
+  src: url("../fonts/KOUVA GLORIN.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Ladi-Weak;
+  src: url("../fonts/Ladi-Weak.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Personify;
+  src: url("../fonts/Personify.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Pilowlava-Regular;
+  src: url("../fonts/Pilowlava-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Tumb-Regular;
+  src: url("../fonts/Tumb-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Zighead;
+  src: url("../fonts/Zighead.otf") format("opentype");
+}
