@@ -21,10 +21,7 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+
 
 p {
   margin: 0;
@@ -41,12 +38,13 @@ p {
 }
 
 .future-is {
-  margin-bottom: 140px;
+  margin-bottom: 120px;
 }
 
 .change-word {
   font-family: var(--current-font);
   font-size: 120px;
+  line-height: 1;
 }
 
 .underline {
@@ -56,7 +54,7 @@ p {
 }
 
 button {
-  margin-top: 40px;
+  margin-top: 60px;
   background-color: #FFF;
   color: #000;
   font-size: 40px;
