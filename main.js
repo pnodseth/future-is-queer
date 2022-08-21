@@ -2,7 +2,7 @@ import './assets/css/normalize.css'
 import './assets/css/style.css'
 import originalWordArray from "./words.json"
 import {getWords} from "./public/firebase.js";
-import {setRandomFont} from "./fonts.js";
+import {simulateMouseClick, setRandomFont, simulateMouseMoveToInitial} from "./fonts.js";
 
 const wordEl = document.querySelector(".change-word");
 const button = document.querySelector("button")
@@ -14,6 +14,8 @@ let isShuffling = false;
 async function shuffleWords() {
     // Find a random word that will be displayed after the shuffle
     const randomElement = wordsRemaining[Math.floor(Math.random() * wordsRemaining.length)];
+    await simulateMouseClick();
+    simulateMouseMoveToInitial()
 
     // Shuffle the array
     const shuffled = shuffleArray([...originalWordArray, randomElement])

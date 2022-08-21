@@ -11,6 +11,7 @@
   background-color: var(--background);
   --current-font: Zighead;
   --background: #000;
+  --cursor-color: #FFF;
 }
 
 
@@ -45,6 +46,7 @@ p {
   font-family: var(--current-font);
   font-size: 120px;
   line-height: 1;
+  height: 120px;
 }
 
 .underline {
@@ -62,6 +64,18 @@ button {
   outline: none;
   padding: 16px 40px;
   border-radius: 40px;
+}
+
+.cursor {
+  position: absolute;
+  top: 80vh;
+  left: 40vw;
+  z-index: 2;
+  transition: all 1s ease-in-out;
+}
+
+path {
+  fill: var(--cursor-color);
 }
 
 @font-face {
