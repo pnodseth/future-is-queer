@@ -3,36 +3,73 @@ import './assets/css/style.css'
 import originalWordArray from "./words.json"
 import {getWords} from "./public/firebase.js";
 import {simulateMouseClick, setRandomFont, simulateMouseMoveToInitial} from "./fonts.js";
+import {setRandomColorPair} from "./colors.js";
 
-const wordEl = document.querySelector(".change-word");
+const wordEl = document.querySelector(".word");
 const button = document.querySelector("button")
 
 let wordsRemaining = [...originalWordArray];
 
 let isShuffling = false;
 
+/* TEMP WHILE ADJUSTING FONT SIZES*/
+/*let tempIdx = 0;
+const btn = document.querySelector("#temp")
+btn.addEventListener("click", nextFont)
+
+function nextFont() {
+    const r = document.querySelector(':root');
+    tempIdx++
+    if (tempIdx >= fontsArr.length) tempIdx = 0;
+    const nextFont = fontsArr[tempIdx];
+    console.log("FONT: ", nextFont.font)
+    console.log("SIZE: ", nextFont.size)
+    r.style.setProperty('--current-font', nextFont.font);
+    r.style.setProperty('--font-size', nextFont.size);
+    r.style.setProperty('--font-top-adjust', nextFont.top);
+
+}
+
+const btn2 = document.querySelector("#temp2")
+btn2.addEventListener("click", prevFont)
+
+function prevFont() {
+    const r = document.querySelector(':root');
+    tempIdx--
+    if (tempIdx < 0) tempIdx = fontsArr.length - 1;
+    const prevFont = fontsArr[tempIdx];
+    console.log("FONT: ", prevFont.font)
+    console.log("SIZE: ", prevFont.size)
+    r.style.setProperty('--current-font', prevFont.font);
+    r.style.setProperty('--font-size', prevFont.size);
+    r.style.setProperty('--font-top-adjust', prevFont.top);
+
+}*/
+
 async function shuffleWords() {
     // Find a random word that will be displayed after the shuffle
     const randomElement = wordsRemaining[Math.floor(Math.random() * wordsRemaining.length)];
     await simulateMouseClick();
+    setRandomColorPair();
     simulateMouseMoveToInitial()
 
     // Shuffle the array
     const shuffled = shuffleArray([...originalWordArray, randomElement])
-    const half = shuffled.splice(0,12);
+    const half = shuffled.splice(0, 12);
 
     const timeBetweenWords = 180;
 
     for (let word of half) {
         await waitForMs(timeBetweenWords);
         setRandomFont();
-        wordEl.innerHTML = word;
+        wordEl.innerHTML = word.toUpperCase();
     }
 
     // Then display the new word
     // Also, remove the used words so it's not reused.
     // When all words have been used, reset so all words are shown again
-    wordEl.innerHTML = randomElement
+    wordEl.innerHTML = randomElement.toUpperCase()
+    setRandomColorPair();
 
     if (wordsRemaining.length === 0) {
         wordsRemaining = [...originalWordArray];

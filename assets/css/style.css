@@ -9,9 +9,11 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   background-color: var(--background);
-  --current-font: Zighead;
+  --current-font: Aveneur;
+  --font-size: 120px;
+  --font-top-adjust: 0;
   --background: #000;
-  --cursor-color: #FFF;
+  --txt-color: #FFF;
 }
 
 
@@ -26,6 +28,7 @@ body {
 
 p {
   margin: 0;
+  color: var(--txt-color)
 }
 
 #app {
@@ -35,18 +38,29 @@ p {
   width: 100vw;
   box-sizing: border-box;
   overflow: hidden;
-
+  background-color: var(--background);
 }
 
+
 .future-is {
-  margin-bottom: 120px;
+  margin-bottom: 60px;
 }
 
 .change-word {
-  font-family: var(--current-font);
-  font-size: 120px;
-  line-height: 1;
+
   height: 120px;
+  position: relative;
+}
+
+.word {
+  line-height: 1;
+  font-size: var(--font-size);
+  font-family: var(--current-font);
+  color: var(--txt-color);
+  position: absolute;
+  top: var(--font-top-adjust);
+  left: 0;
+
 }
 
 .underline {
@@ -55,10 +69,19 @@ p {
   background-color: #FFF;
 }
 
+.underline::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  color: var(--txt-color);
+  border-radius: 12px;
+}
+
 button {
   margin-top: 60px;
-  background-color: #FFF;
-  color: #000;
+  background-color: var(--txt-color);
+  color: var(--background);
   font-size: 40px;
   border: none;
   outline: none;
@@ -75,7 +98,7 @@ button {
 }
 
 path {
-  fill: var(--cursor-color);
+  fill: var(--txt-color);
 }
 
 @font-face {
