@@ -1,8 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import {collection, getDocs, getFirestore} from 'firebase/firestore/lite';
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { doc, onSnapshot } from "firebase/firestore";
+import {initializeApp} from "firebase/app";
 // https://firebase.google.com/docs/firestore/query-data/listen?hl=en&authuser=2
 
 // Your web app's Firebase configuration
@@ -24,8 +23,7 @@ console.log("db: ", db)
 export async function getWords() {
     const wordsCol = collection(db, 'words');
     const wordSnapshot = await getDocs(wordsCol);
-    const wordList = wordSnapshot.docs.map(doc => doc.data());
-    return wordList;
+    return wordSnapshot.docs.map(doc => doc.data().word);
 }
 
 

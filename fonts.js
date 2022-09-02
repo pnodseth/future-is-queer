@@ -5,9 +5,7 @@ const r = document.querySelector(':root');
 const cursor = document.querySelector(".cursor");
 const button = document.querySelector("button");
 
-const buttonPos = button.getBoundingClientRect();
-const buttonCenterX = buttonPos.x + buttonPos.width / 2;
-const buttonCenterY = buttonPos.y + buttonPos.height / 2;
+
 
 
 export function setRandomFont() {
@@ -20,6 +18,10 @@ export function setRandomFont() {
 
 
 export function simulateMouseClick() {
+    const buttonPos = button.getBoundingClientRect();
+    const buttonCenterX = buttonPos.x + buttonPos.width / 2;
+    const buttonCenterY = buttonPos.y + buttonPos.height / 2;
+
     return new Promise(res => {
         const transitionTime = 1000;
 

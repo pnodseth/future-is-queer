@@ -1,6 +1,5 @@
 import './assets/css/normalize.css'
 import './assets/css/style.css'
-import originalWordArray from "./words.json"
 import {getWords} from "./public/firebase.js";
 import {simulateMouseClick, setRandomFont, simulateMouseMoveToInitial} from "./fonts.js";
 import {setRandomColorPair} from "./colors.js";
@@ -8,7 +7,9 @@ import {setRandomColorPair} from "./colors.js";
 const wordEl = document.querySelector(".word");
 const button = document.querySelector("button")
 
-let wordsRemaining = [...originalWordArray];
+const wordsImported = await getWords();
+console.log("words: ", wordsImported)
+let wordsRemaining = [...wordsImported];
 
 let isShuffling = false;
 
@@ -54,7 +55,7 @@ async function shuffleWords() {
     simulateMouseMoveToInitial()
 
     // Shuffle the array
-    const shuffled = shuffleArray([...originalWordArray, randomElement])
+    const shuffled = shuffleArray([...wordsImported, randomElement])
     const half = shuffled.splice(0, 12);
 
     const timeBetweenWords = 180;
@@ -72,7 +73,7 @@ async function shuffleWords() {
     setRandomColorPair();
 
     if (wordsRemaining.length === 0) {
-        wordsRemaining = [...originalWordArray];
+        wordsRemaining = [...wordsImported];
     }
 
     const idx = wordsRemaining.indexOf(randomElement);
@@ -110,7 +111,7 @@ async function waitForMs(delayMs) {
     })
 }
 
-setupWordShuffle()
+
 
 function shuffleArray(array) {
     let curId = array.length;
@@ -127,9 +128,10 @@ function shuffleArray(array) {
     return array;
 }
 
+await setupWordShuffle()
 
-/*const words2 = await getWords();
-console.log("words: ", words2)*/
+
+
 
 
 
