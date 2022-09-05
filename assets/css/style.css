@@ -78,6 +78,12 @@ p {
   border-radius: 12px;
 }
 
+.button-container {
+  display: inline-block;
+  position: relative;
+
+}
+
 button {
   margin-top: 60px;
   background-color: var(--txt-color);
@@ -92,7 +98,7 @@ button {
 .cursor {
   position: absolute;
   top: 80vh;
-  left: 40vw;
+  left: 50vw;
   z-index: 2;
   transition: all 1s ease-in-out;
 }

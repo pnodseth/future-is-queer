@@ -48,3 +48,4 @@ export function setRandomColorPair() {
     r.style.setProperty('--txt-color', currentPair.txt);
 
 }
+

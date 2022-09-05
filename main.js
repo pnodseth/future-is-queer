@@ -8,7 +8,6 @@ const wordEl = document.querySelector(".word");
 const button = document.querySelector("button")
 
 const wordsImported = await getWords();
-console.log("words: ", wordsImported)
 let wordsRemaining = [...wordsImported];
 
 let isShuffling = false;
@@ -127,6 +126,26 @@ function shuffleArray(array) {
     }
     return array;
 }
+
+function interSectionObserver() {
+    let options = {
+        root: document.querySelector('.button-container'),
+        rootMargin: '0px',
+        threshold: 1.0
+    }
+
+
+
+    let observer = new IntersectionObserver(() => {
+        console.log("i was intersected")
+
+    }, options);
+
+    let target = document.querySelector('.cursor');
+    observer.observe(target);
+}
+
+interSectionObserver()
 
 await setupWordShuffle()
 
