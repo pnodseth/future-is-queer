@@ -7,10 +7,7 @@ import {setRandomColorPair} from "./colors.js";
 const wordEl = document.querySelector(".word");
 const button = document.querySelector("button")
 
-const wordsImported = await getWords();
-let wordsRemaining = [...wordsImported];
 
-let isShuffling = false;
 
 /* TEMP WHILE ADJUSTING FONT SIZES*/
 /*let tempIdx = 0;
@@ -46,6 +43,11 @@ function prevFont() {
 
 }*/
 
+let wordsImported;
+let wordsRemaining;
+
+let isShuffling = false;
+
 async function shuffleWords() {
     // Find a random word that will be displayed after the shuffle
     const randomElement = wordsRemaining[Math.floor(Math.random() * wordsRemaining.length)];
@@ -80,6 +82,8 @@ async function shuffleWords() {
 }
 
 async function setupWordShuffle() {
+    wordsImported = await getWords();
+    wordsRemaining = [...wordsImported];
 
     button.addEventListener("click", async () => {
         // shuffle the array of all words, that should be tweened before end word is displayed
@@ -147,7 +151,7 @@ function interSectionObserver() {
 
 interSectionObserver()
 
-await setupWordShuffle()
+setupWordShuffle().then()
 
 
 

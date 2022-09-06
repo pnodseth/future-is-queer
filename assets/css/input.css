@@ -1,0 +1,99 @@
+:root {
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 4rem;
+    font-weight: 400;
+    color: #FFF;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--background);
+    --current-font: Aveneur;
+    --font-size: 120px;
+    --font-top-adjust: 0;
+    --background: #000;
+    --txt-color: #FFF;
+}
+
+body {
+    background-color: #000;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#word {
+    width: 800px;
+    border-bottom: 1px solid #FFF;
+    font-size: 1.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+#point {
+    opacity: 1;
+    animation: pulse 800ms infinite;
+}
+
+@keyframes pulse {
+    /*0%   {background-color: red;}
+    25%  {background-color: yellow;}
+    50%  {background-color: blue;}
+    100% {background-color: green;}*/
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+.keyboard {
+    display: flex;
+    place-items: center;
+    flex-direction: column;
+}
+
+.row {
+    margin-bottom: 8px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 60px;
+    column-gap: 16px;
+}
+
+button {
+    font-family: Verdana;
+    font-size: 30px;
+    outline: none;
+    border: none;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    border-radius: 4px;
+    background-color: lightgray;
+}
+
+#button-del {
+    width: 280%;
+}
+
+
+.submit-container {
+    margin-top: 8px;
+}
+
+.submit {
+    width: 700px;
+
+}
