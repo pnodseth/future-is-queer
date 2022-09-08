@@ -1,5 +1,8 @@
 // Import the functions you need from the SDKs you need
-import {collection, getDocs, getFirestore} from 'firebase/firestore/lite';
+import {collection, getDocs, getFirestore,  setDoc, onSnapshot, doc, query} from 'firebase/firestore';
+
+let initialState = true;
+
 // Import the functions you need from the SDKs you need
 import {initializeApp} from "firebase/app";
 // https://firebase.google.com/docs/firestore/query-data/listen?hl=en&authuser=2
@@ -24,10 +27,35 @@ export async function getWords() {
     const wordsCol = collection(db, 'words');
     const wordSnapshot = await getDocs(wordsCol);
     return wordSnapshot.docs.map(doc => doc.data().word);
+
+
+}
+
+export async function submitWord(word) {
+    // await addDoc(citiesRef,  {word})
+    const wordsRef = doc(db, 'words', word);
+    setDoc(wordsRef, { word }, { merge: true });
+    console.log("success")
+    // Add a new document in collection "cities"
+    /*await setDoc(doc(db, "words"), {
+        word
+    });*/
+}
+
+export  function subscribeToUpdates(cb) {
+    const q = query(collection(db, "words"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+        if (initialState){
+            initialState = false;
+            return;
+        }
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === "added") {
+                console.log("New word: ", change.doc.data().word);
+                cb(change.doc.data().word)
+            }
+        });
+    });
 }
 
 
-/*
-const unsub = onSnapshot(doc(db, "cities", ), (doc) => {
-    console.log("Current data: ", doc.data());
-});*/
