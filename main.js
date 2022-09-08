@@ -3,6 +3,7 @@ import './assets/css/style.css'
 import {getWords, subscribeToUpdates} from "./public/firebase.js";
 import {simulateMouseClick, setRandomFont, simulateMouseMoveToInitial} from "./fonts.js";
 import {setRandomColorPair} from "./colors.js";
+
 const beep = "./assets/beeps.mp3"
 
 /* Setup Audio */
@@ -21,27 +22,33 @@ let isShuffling = false;
 subscribeToUpdates(whenNewWordSubmitted);
 
 async function whenNewWordSubmitted(word) {
-    /* Add the new word to list of all words*/
-    allWordsMainList.push(word);
+    if (!isShuffling) {
+        isShuffling = true;
 
-    // Make a copy of all words, and shuffle them, and only use 12 of the words for displaying random words.
-    const shuffled = shuffleArray([...allWordsMainList])
-    const half = shuffled.splice(0, 12);
+        /* Add the new word to list of all words*/
+        allWordsMainList.push(word);
 
-    const timeBetweenWords = 180;
-    audio.play();
-    for (let w of half) {
-        await waitForMs(timeBetweenWords);
-        setRandomFont();
-        wordEl.innerHTML = w.toUpperCase();
+        // Make a copy of all words, and shuffle them, and only use 12 of the words for displaying random words.
+        const shuffled = shuffleArray([...allWordsMainList])
+        const half = shuffled.splice(0, 12);
+
+        const timeBetweenWords = 180;
+        audio.play();
+        for (let w of half) {
+            await waitForMs(timeBetweenWords);
+            setRandomFont();
+            wordEl.innerHTML = w.toUpperCase();
+        }
+
+        // Then display the submitted word
+        wordEl.innerHTML = word.toUpperCase()
+        setRandomColorPair();
+        audio.pause();
+
+        isShuffling = false;
+
     }
-
-    // Then display the submitted word
-    wordEl.innerHTML = word.toUpperCase()
-    setRandomColorPair();
-    audio.pause();
 }
-
 
 
 async function shuffleWords() {
@@ -118,7 +125,6 @@ async function waitForMs(delayMs) {
         }, delayMs)
     })
 }
-
 
 
 function shuffleArray(array) {
