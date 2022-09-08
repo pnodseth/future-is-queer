@@ -3,6 +3,11 @@ import './assets/css/style.css'
 import {getWords, subscribeToUpdates} from "./public/firebase.js";
 import {simulateMouseClick, setRandomFont, simulateMouseMoveToInitial} from "./fonts.js";
 import {setRandomColorPair} from "./colors.js";
+const beep = "./assets/beeps.mp3"
+
+/* Setup Audio */
+const audio = new Audio(beep);
+audio.load();
 
 const wordEl = document.querySelector(".word");
 const button = document.querySelector("button")
@@ -24,7 +29,7 @@ async function whenNewWordSubmitted(word) {
     const half = shuffled.splice(0, 12);
 
     const timeBetweenWords = 180;
-
+    audio.play();
     for (let w of half) {
         await waitForMs(timeBetweenWords);
         setRandomFont();
@@ -34,7 +39,10 @@ async function whenNewWordSubmitted(word) {
     // Then display the submitted word
     wordEl.innerHTML = word.toUpperCase()
     setRandomColorPair();
+    audio.pause();
 }
+
+
 
 async function shuffleWords() {
     // Check if remaining word List is empty, and repopulate if necessary
@@ -45,6 +53,7 @@ async function shuffleWords() {
     // Find a random word that will be displayed after the shuffle
     const randomElement = wordsRemaining[Math.floor(Math.random() * wordsRemaining.length)];
     await simulateMouseClick();
+    audio.play();
     setRandomColorPair();
     simulateMouseMoveToInitial()
 
@@ -64,6 +73,7 @@ async function shuffleWords() {
 
     wordEl.innerHTML = randomElement.toUpperCase()
     setRandomColorPair();
+    audio.pause()
 
 
     // Also, remove the used words so it's not reused.
