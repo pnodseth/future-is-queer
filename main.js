@@ -6,7 +6,7 @@ import {setRandomColorPair} from "./colors.js";
 const beep = "./assets/beeps.mp3"
 
 /* Setup Audio */
-const audio = new Audio(beep);
+const audio = new Audio("/beeps.mp3");
 audio.load();
 
 const wordEl = document.querySelector(".word");
