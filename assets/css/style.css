@@ -65,6 +65,8 @@ button {
   position: absolute;
   top: var(--font-top-adjust);
   left: 0;
+  max-width: 70vw;
+  overflow: hidden;
 
 }
 
