@@ -1,0 +1,50 @@
+{
+  "name": "TheFutureIs",
+  "short_name": "futureis",
+  "description": "",
+  "version": "0.0.0.1",
+  "manifest_version": 2,
+  "default_locale": "en-GB",
+  "author": "Pål Nødseth",
+  "start_url": "/input/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "theme_color": "#000",
+  "background_color": "#000",
+  "icons": [
+    {
+      "src": "images/app-icon-chrome.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "images/app-icon-tiny.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "images/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "app": {
+    "urls": [
+      "http://192.168.1.68:5173/input/index.html"
+    ],
+    "launch": {
+      "web_url": "http://192.168.1.68:5173/input/index.html"
+    },
+
+    "permissions": [
+      "unlimitedStorage",
+      "notifications",
+      "fullscreen"
+    ]
+  }
+}

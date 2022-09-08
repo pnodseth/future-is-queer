@@ -7,8 +7,8 @@ import {setRandomColorPair} from "./colors.js";
 const wordEl = document.querySelector(".word");
 const button = document.querySelector("button")
 
-let wordsImported;
-let wordsRemaining;
+let allWordsMainList = [];
+let wordsRemaining = [];
 
 let isShuffling = false;
 
@@ -16,8 +16,11 @@ let isShuffling = false;
 subscribeToUpdates(whenNewWordSubmitted);
 
 async function whenNewWordSubmitted(word) {
-    // Shuffle the array
-    const shuffled = shuffleArray([...wordsImported, word])
+    /* Add the new word to list of all words*/
+    allWordsMainList.push(word);
+
+    // Make a copy of all words, and shuffle them, and only use 12 of the words for displaying random words.
+    const shuffled = shuffleArray([...allWordsMainList])
     const half = shuffled.splice(0, 12);
 
     const timeBetweenWords = 180;
@@ -29,30 +32,24 @@ async function whenNewWordSubmitted(word) {
     }
 
     // Then display the submitted word
-
     wordEl.innerHTML = word.toUpperCase()
     setRandomColorPair();
-
-
-    // When all words have been used, reset so all words are shown again
-    if (wordsRemaining.length === 0) {
-        wordsRemaining = [...wordsImported];
-    }
-
-    // Also, remove the used words so it's not reused.
-    const idx = wordsRemaining.indexOf(word);
-    wordsRemaining.splice(idx, 1)
 }
 
 async function shuffleWords() {
+    // Check if remaining word List is empty, and repopulate if necessary
+    if (wordsRemaining.length === 0) {
+        wordsRemaining = [...allWordsMainList];
+    }
+
     // Find a random word that will be displayed after the shuffle
     const randomElement = wordsRemaining[Math.floor(Math.random() * wordsRemaining.length)];
     await simulateMouseClick();
     setRandomColorPair();
     simulateMouseMoveToInitial()
 
-    // Shuffle the array
-    const shuffled = shuffleArray([...wordsImported, randomElement])
+    // Make a copy of all words, shuffle them and use 12 of the words
+    const shuffled = shuffleArray([...allWordsMainList, randomElement])
     const half = shuffled.splice(0, 12);
 
     const timeBetweenWords = 180;
@@ -64,22 +61,24 @@ async function shuffleWords() {
     }
 
     // Then display the new word
-    // Also, remove the used words so it's not reused.
-    // When all words have been used, reset so all words are shown again
+
     wordEl.innerHTML = randomElement.toUpperCase()
     setRandomColorPair();
 
-    if (wordsRemaining.length === 0) {
-        wordsRemaining = [...wordsImported];
-    }
 
+    // Also, remove the used words so it's not reused.
     const idx = wordsRemaining.indexOf(randomElement);
     wordsRemaining.splice(idx, 1)
+
+    // Check if remaining word List is empty, and repopulate if necessary
+    if (wordsRemaining.length === 0) {
+        wordsRemaining = [...allWordsMainList];
+    }
 }
 
 async function setupWordShuffle() {
-    wordsImported = await getWords();
-    wordsRemaining = [...wordsImported];
+    allWordsMainList = await getWords();
+    wordsRemaining = [...allWordsMainList];
 
     button.addEventListener("click", async () => {
         // shuffle the array of all words, that should be tweened before end word is displayed
@@ -126,26 +125,6 @@ function shuffleArray(array) {
     }
     return array;
 }
-
-function interSectionObserver() {
-    let options = {
-        root: document.querySelector('.button-container'),
-        rootMargin: '0px',
-        threshold: 1.0
-    }
-
-
-
-    let observer = new IntersectionObserver(() => {
-        console.log("i was intersected")
-
-    }, options);
-
-    let target = document.querySelector('.cursor');
-    observer.observe(target);
-}
-
-interSectionObserver()
 
 setupWordShuffle().then()
 

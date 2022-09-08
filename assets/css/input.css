@@ -9,11 +9,11 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     background-color: var(--background);
-    --current-font: Aveneur;
     --font-size: 120px;
     --font-top-adjust: 0;
     --background: #000;
     --txt-color: #FFF;
+    --current-font: "Baunk"
 }
 
 body {
@@ -34,11 +34,34 @@ main {
     font-size: 1.5rem;
     position: relative;
     margin-bottom: 0.5rem;
+    font-family: var(--current-font);
+    min-height: 120px;
 }
 
 #point {
     opacity: 1;
     animation: pulse 800ms infinite;
+}
+
+#heading {
+    font-family: var(--current-font);
+    font-size: 40px;
+}
+
+.thank-you {
+    text-align: center;
+    font-size: 24px;
+    font-family: var(--current-font);
+    font-weight: 400;
+}
+
+#thank-you-message {
+    font-family: var(--current-font);
+    display: none;
+}
+
+.thank-you h1, h2 {
+    margin: 0;
 }
 
 @keyframes pulse {
@@ -60,6 +83,7 @@ main {
     display: flex;
     place-items: center;
     flex-direction: column;
+    font-family: Verdana;
 }
 
 .row {
@@ -71,7 +95,7 @@ main {
 }
 
 button {
-    font-family: Verdana;
+    font-family: Chemre;
     font-size: 30px;
     outline: none;
     border: none;
@@ -84,16 +108,78 @@ button {
     background-color: lightgray;
 }
 
-#button-del {
+.button-del {
     width: 280%;
 }
 
 
 .submit-container {
     margin-top: 8px;
+    display: flex;
+    place-content: center;
 }
 
-.submit {
-    width: 700px;
+#submit {
+    width: 800px;
 
+}
+
+@font-face {
+    font-family: Aveneur;
+    src: url("../fonts/Aveneur.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Baunk;
+    src: url("../fonts/Baunk.otf") format("opentype");
+}
+
+@font-face {
+    font-family: BROKAT_BY_BOAFFF;
+    src: url("../fonts/BROKAT_BY_BOAFFF.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: Chemre;
+    src: url("../fonts/Chemre.otf") format("opentype");
+}
+
+@font-face {
+    font-family: FT88-Italic;
+    src: url("../fonts/FT88-Italic.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Greca;
+    src: url("../fonts/Greca.otf") format("opentype");
+}
+
+@font-face {
+    font-family: KOUVA GLORIN;
+    src: url("../fonts/KOUVA GLORIN.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Ladi-Weak;
+    src: url("../fonts/Ladi-Weak.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Personify;
+    src: url("../fonts/Personify.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Pilowlava-Regular;
+    src: url("../fonts/Pilowlava-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Tumb-Regular;
+    src: url("../fonts/Tumb-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Zighead;
+    src: url("../fonts/Zighead.otf") format("opentype");
 }

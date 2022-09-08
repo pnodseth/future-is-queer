@@ -44,6 +44,11 @@ p {
 
 .future-is {
   margin-bottom: 60px;
+  font-family: serif;
+}
+
+button {
+  font-family: serif;
 }
 
 .change-word {
