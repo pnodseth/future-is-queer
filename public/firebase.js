@@ -19,9 +19,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-console.log("app: ", app)
 const db = getFirestore(app);
-console.log("db: ", db)
 // Get a list of cities from your database
 export async function getWords() {
     const wordsCol = collection(db, 'words');
@@ -33,7 +31,7 @@ export async function getWords() {
 
 export async function submitWord(word) {
     // await addDoc(citiesRef,  {word})
-    const wordsRef = doc(db, 'words', word);
+    const wordsRef = doc(db, 'words', word + Date.now());
     setDoc(wordsRef, { word }, { merge: true });
     console.log("success")
     // Add a new document in collection "cities"
@@ -54,6 +52,7 @@ export  function subscribeToUpdates(cb) {
                 console.log("New word: ", change.doc.data().word);
                 cb(change.doc.data().word)
             }
+                console.log("change type: ", change.type)
         });
     });
 }
